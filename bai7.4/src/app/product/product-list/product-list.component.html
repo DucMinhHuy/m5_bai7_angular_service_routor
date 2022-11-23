@@ -1,0 +1,16 @@
+<p>product-list works!</p>
+<h1>ds san pham</h1>
+<table>
+  <tr>
+    <td>stt</td>
+    <td>name</td>
+    <td>price</td>
+    <td>dis</td>
+  </tr>
+  <tr *ngFor="let products of product; index as i">
+    <td>{{i+1}}</td>
+    <td>{{products.name}}</td>
+    <td>{{products.price}}</td>
+    <td>{{products.description}}</td>
+  </tr>
+</table>

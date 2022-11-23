@@ -1,0 +1,5 @@
+<p>youtobe-playlist works!</p>
+<ul>
+  <li *ngFor="let song of playlist"><a [routerLink]="['/youtobe',song.id]">{{song.name}}</a></li>
+</ul>
+<router-outlet></router-outlet>
