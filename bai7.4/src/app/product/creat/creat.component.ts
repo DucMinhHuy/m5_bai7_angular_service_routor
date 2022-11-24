@@ -18,7 +18,11 @@ export class CreatComponent {
   }
   submit(){
     const product=this.productForm.value;
-    this.productServicr.saveProduct(product);
-    this.productForm.reset();
+    this.productServicr.saveProduct(product).subscribe(()=>{
+      this.productForm.reset();
+      alert('tao thanh cong');
+    },e=>{
+      console.log(e);
+      });
   }
 }

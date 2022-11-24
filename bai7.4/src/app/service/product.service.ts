@@ -1,48 +1,28 @@
 import { Injectable } from '@angular/core';
 import {Product} from "../modle/product";
-
+import {enviroments} from "../enviroment/enviroments";
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
+const API_URL=`${enviroments.apiUrl}`;
 @Injectable({
-  providedIn: 'root'
+  providedIn:'root'
 })
 export class ProductService {
 
-  constructor() { }
-  product : Product[]=[
-    {
-      id: 1,
-      name: 'IPhone 12',
-      price: 2400000,
-      description: 'New'
-    },
-    {
-      id: 2,
-      name: 'IPhone 11',
-      price: 1560000,
-      description: 'Like new'
-    },
-    {
-      id: 3,
-      name: 'IPhone X',
-      price: 968000,
-      description: '97%'
-    },
-    {
-      id: 4,
-      name: 'IPhone 8',
-      price: 7540000,
-      description: '98%'
-    },
-    {
-      id: 5,
-      name: 'IPhone 11 Pro',
-      price: 1895000,
-      description: 'Like new'
-    }
-  ];
-  getAll(){
-    return this.product;
+  constructor(private http : HttpClient) { }
+  getAll(): Observable<Product[]>{
+    return this.http.get<Product[]>(API_URL+'/product');
   }
-  saveProduct(product :any){
-    this.product.push(product);
+  saveProduct(product:any):Observable<Product>{
+    return this.http.post<Product>(API_URL +'/product',product);
+  }
+  findById(id:number):Observable<Product>{
+    return this.http.get<Product>(`${API_URL}/product/${id}`);
+  }
+  Update(id:number,product:Product):Observable<Product>{
+    return this.http.put<Product>(`${API_URL}/product/edit/${id}`,product);
+  }
+  delete(id:number):Observable<Product>{
+    return this.http.delete<Product>(`${API_URL}/product/${id}`);
   }
 }

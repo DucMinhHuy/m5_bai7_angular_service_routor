@@ -15,6 +15,8 @@ ngOnInit() {
   this.getAll();
 }
 getAll(){
-  this.product=this.productService.getAll();
+  this.productService.getAll().subscribe(product=>{
+    this.product=product;
+  });
 }
 }
